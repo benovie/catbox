@@ -16,8 +16,8 @@
 <md-divider></md-divider>
 <div class="md-padding">
 	<md-input-container>
-		<md-checkbox ng-model="opdracht.antwoorden[accountId].keuzes[id]" aria-label="{{keuze}}" ng-repeat="(id, label) in opdracht.keuzes">
-		   {{label}}
+		<md-checkbox ng-model="opdracht.antwoorden[accountId].keuzes[id]" aria-label="{{keuze.label}}" ng-repeat="(id, keuze) in opdracht.keuzes">
+		   {{keuze.label}}
 		</md-checkbox>
 	</md-input-container>
 </div>

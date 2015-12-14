@@ -14,26 +14,6 @@
 			<input required ng-model="user.achternaam" />
 		</md-input-container>
 	</pi-accordeon-item>
-	<pi-accordeon-item label="Thema">
-		<div ng-controller="piThemeController">
-			<p class="md-body-2">Kies twee kleuren om het thema van de app in te stellen</p>
-			<div class="md-padding">
-				<pi-material-palette pp="theme.pp" ap="theme.ap"></pi-material-palette>
-			</div>
-			<md-divider></md-divider>
-			<div class="md-padding" layout="row" layout-align="start center">
-				<span>
-					<small><strong>Primair</strong></small>
-					<pi-material-palette-item palette="{{theme.pp}}"></pi-material-palette-item>
-				</span>
-				<span>
-					<small><strong>Secundair</strong></small>
-					<pi-material-palette-item palette="{{theme.ap}}"></pi-material-palette-item>
-				</span>
-				<md-button class="md-raised" ng-click="changeTheme()">Opslaan</md-button>
-			</div>
-		</div>
-	</pi-accordeon-item>
 	<pi-accordeon-item label="Wachtwoord wijzigen">
 		<div ng-controller="AppFirebaseAccountController">
 			<form name="AppFirebaseChangePasswordForm" ng-if="canChangePassword" ng-submit="changePassword(AppFirebaseChangePasswordForm)">

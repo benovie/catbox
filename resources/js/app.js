@@ -1,11 +1,11 @@
 angular.module('app',[
 	'perfectin',
 	'ngSanitize',
-	'ytApp',
 	'app.firebase'
 ]).constant('FBURL','https://leren.firebaseio.com/'
-).config(['$routeProvider','$mdThemingProvider',
+).config(['$routeProvider', '$mdThemingProvider',
 	function($routeProvider, $mdThemingProvider) {
+		$mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('orange');
 		$routeProvider.whenAuthenticated('/',{
 			templateUrl: 'resources/templates/home.html'
 		}).whenAuthenticated('/les/:les',{
@@ -30,7 +30,12 @@ angular.module('app',[
 	$scope.addOpdracht = function(lesId) {
 		$mdDialog.show({
 			templateUrl: 'resources/templates/les/opdracht-toevoegen.html',
-			controller: 'piDialogController'
+			controller: 'piDialogController',
+			locals: {
+				data: {
+					type: 'vraag'
+				}
+			}
 		}).then(function(data) {
 			var lesopdrachten = AppFirebaseUtil.array('lesopdracht/'+ lesId);
 			lesopdrachten.$add(data);
@@ -39,7 +44,10 @@ angular.module('app',[
 	$scope.addLes = function() {
 		$mdDialog.show({
 			templateUrl: 'resources/templates/les/les-toevoegen.html',
-			controller: 'piDialogController'
+			controller: 'piDialogController',
+			locals: {
+				data: {}
+			}
 		}).then(function(data) {
 			var lesopdrachten = AppFirebaseUtil.array('les');
 			lesopdrachten.$add(data);

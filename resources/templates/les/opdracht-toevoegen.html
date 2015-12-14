@@ -1,32 +1,40 @@
 <md-dialog>
 	<div class="md-padding">
 		<h2 class="md-headline">Nieuwe opdracht</h2>
-		<form ng-submit="submit()">
+		<form name="opdrachtToevoegenForm" ng-submit="submit()">
+			<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='groepsgesprek'}" ng-click="data.type = 'groepsgesprek'">
+				Gesprek
+			</md-button>
+			<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='meerkeuze'}" ng-click="data.type = 'meerkeuze'">Meerkeuze
+			</md-button>
+			<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='vraag'}" ng-click="data.type = 'vraag'">	
+				Vraag
+			</md-button>
 			<md-input-container>
-				<label>Type</label>
-				<md-select required ng-model="data.type">
-					<md-option value="groepsgesprek">Groepsgesprek</md-option>
-					<md-option value="meerkeuze">Meerkeuze</md-option>
-					<md-option value="vraag">Open vraag</md-option>
-				</md-select>
-			</md-input-container>
-			<md-input-container>
-				<label>Titel</label>
-				<input autocomplete="off" required ng-model="data.titel" />
+				<label>Vraag <sup>*</sup></label>
+				<input autofocus autocomplete="off" required ng-model="data.vraag" />
 			</md-input-container>
 			<md-input-container>
 				<label>Beschrijving</label>
 				<textarea ng-model="data.beschrijving"></textarea>
 			</md-input-container>
-			<md-input-container>
-				<label>Vraag</label>
-				<input autocomplete="off" required ng-model="data.vraag" />
-			</md-input-container>
-			<div layout="row">
+			<div ng-if="data.type == 'meerkeuze'">
+				<h3 class="md-subject">Keuzes</h3>
+				<md-divider>
+					<md-button class="md-fab md-mini" type="button" ng-click="addNewArrayItem('keuzes')">
+						<md-icon>add</md-icon>
+					</md-button>
+				</md-divider>
+				<md-input-container ng-repeat="keuze in data.keuzes">
+					<label>Keuze {{$index + 1}}</label>
+					<input required ng-model="keuze.label" />
+				</md-input-container>
+			</div>
+			<div layout="row" layout-align="end center">
 				<md-button type="button" ng-click="cancel()">
 					annuleer
 				</md-button>
-				<md-button type="submit" class="md-primary md-raised">
+				<md-button ng-disabled="!opdrachtToevoegenForm.$valid" type="submit" class="md-primary md-raised">
 					Voeg toe <md-icon>send</md-icon>
 				</md-button>
 			</div>

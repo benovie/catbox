@@ -1,10 +1,4 @@
-angular.module('perfectin',['ngMaterial','ngRoute']).config(['$mdThemingProvider',
-	function($mdThemingProvider) {
-		var themePp = $.cookie('theme-pp') || 'cyan';
-		var themeAp = $.cookie('theme-ap') || 'orange';
-		$mdThemingProvider.theme('default').primaryPalette(themePp).accentPalette(themeAp);
-	}
-]).run(['$rootScope', '$window', '$location', '$mdColorPalette', 'piToolbarTitle', function($rootScope, $window, $location, $mdColorPalette, toolbar) {
+angular.module('perfectin',['ngMaterial','ngRoute']).run(['$rootScope', '$window', '$location', '$mdColorPalette', 'piToolbarTitle', function($rootScope, $window, $location, $mdColorPalette, toolbar) {
 	$rootScope.$on('$routeChangeStart', function(event, next, previous) {
 		var pageTransition = '';
 		if (previous) {
@@ -30,38 +24,25 @@ angular.module('perfectin',['ngMaterial','ngRoute']).config(['$mdThemingProvider
 	$rootScope.goBack = function() {
 		$window.history.back();
 	};
-
-	var themePp = $.cookie('theme-pp') || 'cyan';
-	var themeAp = $.cookie('theme-ap') || 'orange';
-	var primaryColor = $mdColorPalette[themePp][500].value;
-	var accentColor = $mdColorPalette[themeAp][500].value;
-	var styleStrings = '.pi-accordeon-item-handle.expanded {color: rgb('+primaryColor[0]+','+primaryColor[1]+ ',' +primaryColor[2]+');}';
-	var head = document.getElementsByTagName('head')[0];
-	var firstChild = head ? head.firstElementChild : null;
-	var style = document.createElement('style');
-	style.setAttribute('type', 'text/css');
-	style.appendChild(document.createTextNode(styleStrings));
-	head.insertBefore(style, firstChild);
-
-}]).controller('piThemeController', ['$scope','$window', 
-	function($scope, $window) {
-		$scope.theme = {
-			pp : $.cookie('theme-pp') || 'cyan',
-			ap : $.cookie('theme-ap') || 'orange',
-		};
-		$scope.changeTheme = function() {
-			$.cookie('theme-pp', $scope.theme.pp);
-			$.cookie('theme-ap', $scope.theme.ap);
-			$window.location.reload();
-		};
-	}
-]).controller('piDialogController', ['$scope','$mdDialog', function($scope, $mdDialog) {
-	$scope.data = {};    
+}]).controller('piDialogController', ['$scope','$mdDialog', 'data', function($scope, $mdDialog, data) {
+	$scope.data = data || {};    
     $scope.submit = function() {
         $mdDialog.hide($scope.data);
     };
     $scope.cancel = function() {
         $mdDialog.cancel();
+    };
+    $scope.addNewArrayItem = function(property) {
+    	function guid() {
+		  function s4() {
+		    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+		  }
+		  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+		}
+		if (typeof($scope.data[property]) == 'undefined') {
+			$scope.data[property] = {};
+		}
+		$scope.data[property][guid()] = {};
     };
 }]).directive('piDynamicWidth', function() {
 	return {

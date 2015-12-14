@@ -27,26 +27,6 @@ angular.module('app').run(['$templateCache', function($templateCache) {
     "\t\t\t<input required ng-model=\"user.achternaam\" />\n" +
     "\t\t</md-input-container>\n" +
     "\t</pi-accordeon-item>\n" +
-    "\t<pi-accordeon-item label=\"Thema\">\n" +
-    "\t\t<div ng-controller=\"piThemeController\">\n" +
-    "\t\t\t<p class=\"md-body-2\">Kies twee kleuren om het thema van de app in te stellen</p>\n" +
-    "\t\t\t<div class=\"md-padding\">\n" +
-    "\t\t\t\t<pi-material-palette pp=\"theme.pp\" ap=\"theme.ap\"></pi-material-palette>\n" +
-    "\t\t\t</div>\n" +
-    "\t\t\t<md-divider></md-divider>\n" +
-    "\t\t\t<div class=\"md-padding\" layout=\"row\" layout-align=\"start center\">\n" +
-    "\t\t\t\t<span>\n" +
-    "\t\t\t\t\t<small><strong>Primair</strong></small>\n" +
-    "\t\t\t\t\t<pi-material-palette-item palette=\"{{theme.pp}}\"></pi-material-palette-item>\n" +
-    "\t\t\t\t</span>\n" +
-    "\t\t\t\t<span>\n" +
-    "\t\t\t\t\t<small><strong>Secundair</strong></small>\n" +
-    "\t\t\t\t\t<pi-material-palette-item palette=\"{{theme.ap}}\"></pi-material-palette-item>\n" +
-    "\t\t\t\t</span>\n" +
-    "\t\t\t\t<md-button class=\"md-raised\" ng-click=\"changeTheme()\">Opslaan</md-button>\n" +
-    "\t\t\t</div>\n" +
-    "\t\t</div>\n" +
-    "\t</pi-accordeon-item>\n" +
     "\t<pi-accordeon-item label=\"Wachtwoord wijzigen\">\n" +
     "\t\t<div ng-controller=\"AppFirebaseAccountController\">\n" +
     "\t\t\t<form name=\"AppFirebaseChangePasswordForm\" ng-if=\"canChangePassword\" ng-submit=\"changePassword(AppFirebaseChangePasswordForm)\">\n" +
@@ -115,9 +95,9 @@ angular.module('app').run(['$templateCache', function($templateCache) {
     "  \t\t<md-icon ng-if=\"opdracht.type == 'meerkeuze'\">check_box</md-icon>  \n" +
     "  \t\t<md-icon ng-if=\"opdracht.type == 'groepsgesprek'\">people</md-icon>     \n" +
     "  \t\t<div class=\"md-list-item-text\">\n" +
-    "\t        <h3>{{opdracht.titel}}</h3>\n" +
+    "\t        <h3>{{opdracht.beschrijving | limitTo: 60}}</h3>\n" +
     "\t\t\t<p>\n" +
-    "\t\t\t\t{{opdracht.vraag | limitTo: 60}} ...<br/>\n" +
+    "\t\t\t\t{{opdracht.vraag}}<br/>\n" +
     "\t\t\t\t<small ng-if=\"opdracht.type == 'groepsgesprek'\">\n" +
     "\t\t\t\t\t{{opdracht.reacties.length || 0}} reactie(s)\n" +
     "\t\t\t\t</small>  \n" +
