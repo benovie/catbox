@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+		<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="build/all.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Catbox</title>
+		<script src="build/lib.js"></script>
+		<script src="build/app.js"></script>
+	</head>
+	<body>	
+		<div layout-fill layout="column">
+			<pi-toolbar>
+				<div layout="row" layout-align="start center" ng-if="account" ng-controller="AppFirebaseAuthenticationController">
+		  			<span class="md-body-2" ng-click="navigateTo('account')">{{account.user.username}}</span>
+			  		<md-button class="md-inline" ng-click="navigateTo('account')">
+						<md-icon class="material-icons">face</md-icon>
+		            	<md-tooltip>Account</md-tooltip>
+					</md-button>
+					<md-button class="md-inline" ng-click="logoff()">
+						<md-icon class="material-icons">input</md-icon>
+		            	<md-tooltip>Uitloggen</md-tooltip>
+					</md-button>
+		  		</div>
+			</pi-toolbar>
+			<div class="main" layout="column" flex layout-align="start center">
+				<md-content class="md-whiteframe-z2" ng-view>
+				</md-content>
+			</div>
+		</div>
+	</body>
+</html>

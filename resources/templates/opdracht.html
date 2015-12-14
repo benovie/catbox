@@ -1,0 +1,17 @@
+<fb-data type="object" bind-to="opdracht" path="lesopdracht/{{currentRoute.params.les}}/{{currentRoute.params.opdracht}}"></fb-data>
+<md-subheader class="md-primary">
+	{{opdracht.titel}}
+</md-subheader>
+<md-divider></md-divider>
+<md-content>
+	<opdracht les="{{currentRoute.params.les}}" id="{{currentRoute.params.opdracht}}"></opdracht>
+	<md-divider></md-divider>
+	<div layout="row"  layout-align="end center">
+		<md-checkbox ng-model="opdracht.done">
+			klaar
+		</md-checkbox>
+		<md-button class="md-raised md-primary" type="button" ng-click="goBack()">
+			ok
+		</md-button>
+	</div>
+</md-content>

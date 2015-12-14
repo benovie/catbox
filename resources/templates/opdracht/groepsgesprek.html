@@ -1,0 +1,57 @@
+<md-list>
+	<md-list-item ng-if="opdracht.beschrijving">
+  		<md-icon>description</md-icon>
+    	<p ng-bind-html="opdracht.beschrijving"></p>
+	</md-list-item>
+	<md-list-item ng-if="opdracht.vraag">
+  		<md-icon>question_answer</md-icon>     	
+		<p class="md-body-2">{{opdracht.vraag}}</p>
+	</md-list-item>
+</md-list>
+<form name="lerenAntwoordFormulier" ng-submit="reageer(lerenAntwoordFormulier)">
+	<div layout="row" layout-align="start center">
+		<md-input-container md-no-float flex>
+			<input autocomplete="off" placeholder="Schrijf een reactie..." required ng-model="reactieInput.tekst" />
+		</md-input-container>
+		<md-button type="submit" class="md-icon-button">
+			<md-icon>send</md-icon>
+		</md-button>
+	</div>
+</form> 
+<div class="md-padding">
+	<div ng-repeat="reactie in opdracht.reacties" class="reaction">
+		<p>
+			<fb-user uid="{{reactie.van}}"></fb-user>
+			{{reactie.tekst}}
+		</p>
+		<small>
+			<datum-sinds datum="{{reactie.datum}}"></datum-sinds>
+			<md-tooltip>{{reactie.datum | date:"EEEE dd MMMM yyyy 'om' HH:mm"}}</md-tooltip>
+		</small>
+		<span ng-if="reactie.van === accountId">
+			<md-button ng-hide="confirm" class="md-link md-warn md-small" ng-click="confirm = true">
+				verwijder
+			</md-button>
+			<span ng-show="confirm">
+				<span class="md-body">weet je het zeker?</span>
+				<md-button class="md-link md-warn md-small" ng-click="verwijderReactie(reactie, opdracht.reacties)">
+					ja
+				</md-button>
+				<md-button class="md-link md-small" ng-click="confirm = false">
+					nee
+				</md-button>
+			</span>
+		</span>
+		<span ng-if="reactie.van !== accountId">
+			<md-button ng-show="!liked(reactie)" class="md-link md-accent md-small" ng-click="like(reactie)">
+				vind ik leuk ({{reactie.amountOfLikes}})
+			</md-button>
+			<md-button ng-show="liked(reactie)" class="md-link md-accent md-small" ng-click="unlike(reactie)">
+				vind ik niet meer leuk ({{reactie.amountOfLikes}})
+			</md-button>
+		</span>
+	</div>
+	<small ng-if="!opdracht.reacties">
+		Er zijn nog geen reacties
+	</small>
+</div>

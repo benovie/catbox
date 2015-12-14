@@ -1,0 +1,23 @@
+<md-dialog>
+	<div class="md-padding">
+		<h2 class="md-headline">Nieuwe les</h2>
+		<form ng-submit="submit()">
+			<md-input-container>
+				<label>Naam</label>
+				<input autocomplete="off" required ng-model="data.naam" />
+			</md-input-container>
+			<md-input-container>
+				<label>Beschrijving</label>
+				<textarea ng-model="data.beschrijving"></textarea>
+			</md-input-container>
+			<div layout="row">
+				<md-button type="button" ng-click="cancel()">
+					annuleer
+				</md-button>
+				<md-button type="submit" class="md-primary md-raised">
+					Voeg toe <md-icon>send</md-icon>
+				</md-button>
+			</div>
+		</form>
+	</div>
+</md-dialog>

@@ -1,0 +1,26 @@
+<md-list>
+	<md-list-item ng-if="opdracht.beschrijving">
+  		<md-icon>description</md-icon>
+    	<p ng-bind-html="opdracht.beschrijving"></p>
+	</md-list-item>
+	<md-list-item ng-if="opdracht.vraag">
+  		<md-icon>question_answer</md-icon>     	
+		<p class="md-body-2">{{opdracht.vraag}}</p>
+	</md-list-item>
+</md-list>
+<form name="lerenAntwoordFormulier" ng-submit="antwoord(lerenAntwoordFormulier)">
+	<div layout="row" layout-align="start center">
+		<md-input-container flex md-no-float>
+			<textarea placeholder="Geef je antwoord" required ng-model="antwoordInput.tekst"></textarea>
+		</md-input-container>
+		<md-button type="submit" class="md-icon-button">
+			<md-icon>send</md-icon>
+		</md-button>
+	</div>
+</form>
+<div class="md-padding">
+	<p ng-if="opdracht.antwoorden[accountId].tekst">{{opdracht.antwoorden[accountId].tekst}}</p>
+	<small ng-if="!opdracht.antwoorden[accountId].tekst" class="md-warn">
+		<md-icon>warning</md-icon> je hebt nog geen antwoord gegeven
+	</small>
+</div>

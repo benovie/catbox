@@ -1,0 +1,59 @@
+<div class="md-padding">
+	<h3 class="md-headline">Mijn account</h3>
+</div>
+<md-divider></md-divider>
+<fb-data bind-to="user" type="object" path="users/{{account.uid}}"></fb-data>
+<pi-accordeon open="Persoonlijk">
+	<pi-accordeon-item active="true" label="Persoonlijk">
+		<md-input-container>
+			<label>Voornaam</label>
+			<input required ng-model="user.voornaam" />
+		</md-input-container>
+		<md-input-container>
+			<label>Achternaam</label>
+			<input required ng-model="user.achternaam" />
+		</md-input-container>
+	</pi-accordeon-item>
+	<pi-accordeon-item label="Thema">
+		<div ng-controller="piThemeController">
+			<p class="md-body-2">Kies twee kleuren om het thema van de app in te stellen</p>
+			<div class="md-padding">
+				<pi-material-palette pp="theme.pp" ap="theme.ap"></pi-material-palette>
+			</div>
+			<md-divider></md-divider>
+			<div class="md-padding" layout="row" layout-align="start center">
+				<span>
+					<small><strong>Primair</strong></small>
+					<pi-material-palette-item palette="{{theme.pp}}"></pi-material-palette-item>
+				</span>
+				<span>
+					<small><strong>Secundair</strong></small>
+					<pi-material-palette-item palette="{{theme.ap}}"></pi-material-palette-item>
+				</span>
+				<md-button class="md-raised" ng-click="changeTheme()">Opslaan</md-button>
+			</div>
+		</div>
+	</pi-accordeon-item>
+	<pi-accordeon-item label="Wachtwoord wijzigen">
+		<div ng-controller="AppFirebaseAccountController">
+			<form name="AppFirebaseChangePasswordForm" ng-if="canChangePassword" ng-submit="changePassword(AppFirebaseChangePasswordForm)">
+				<md-input-container>
+					<label>Vorige wachtwoord</label>
+					<input type="password" required ng-model="nieuwwachtwoord.huidigWachtwoord" />
+				</md-input-container>
+				<md-input-container>
+					<label>Nieuw wachtwoord</label>
+					<input type="password" required ng-model="nieuwwachtwoord.wachtwoord" />
+				</md-input-container>
+				<md-input-container>
+					<label>Bevestig nieuw wachtwoord</label>
+					<input type="password" pi-compare-to="nieuwwachtwoord.wachtwoord" required ng-model="nieuwwachtwoord.bevestiging" />
+				</md-input-container>
+				<div layout="row" layout-align="end center">
+					<md-button ng-disabled="AppFirebaseChangePasswordForm.$invalid" class="md-primary md-raised">wijzig</md-button>
+				</div>
+			</form>
+			<p ng-if="!canChangePassword" class="md-body-2">You can not change your password if you are logged in with {{account.provider}}</p> 
+		</div>
+	</pi-accordeon-item>
+</pi-accordeon>

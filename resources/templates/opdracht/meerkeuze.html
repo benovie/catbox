@@ -1,0 +1,23 @@
+<md-list>
+	<md-list-item ng-if="opdracht.beschrijving">
+  		<md-icon>description</md-icon>
+    	<p ng-bind-html="opdracht.beschrijving"></p>
+	</md-list-item>
+	<md-list-item ng-if="opdracht.vraag">
+  		<md-icon>question_answer</md-icon>     	
+		<p class="md-body-2">{{opdracht.vraag}}</p>
+	</md-list-item>
+</md-list>
+<youtube id="5NV6Rdv1a3I" width="640" height="360"></youtube>
+<md-divider></md-divider>
+<md-subheader>
+	Mijn antwoord
+</md-subheader>
+<md-divider></md-divider>
+<div class="md-padding">
+	<md-input-container>
+		<md-checkbox ng-model="opdracht.antwoorden[accountId].keuzes[id]" aria-label="{{keuze}}" ng-repeat="(id, label) in opdracht.keuzes">
+		   {{label}}
+		</md-checkbox>
+	</md-input-container>
+</div>

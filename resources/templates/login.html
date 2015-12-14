@@ -1,0 +1,18 @@
+<div layout="row" layout-align="center center">
+	<div class="md-padding">	
+		<h2 class="md-headline">Inloggen</h2>
+		<form ng-submit="login(email, password)" ng-controller="AppFirebaseAuthenticationController">
+			<md-input-container>
+				<label>email</label>
+		        <input autofocus required type="email" autocomplete="off" ng-disabled="loginActive" ng-model="email" />
+			</md-input-container>
+		   <md-input-container>
+		        <label>password</label>
+		        <input required type="password" ng-disabled="loginActive" ng-model="password" />
+		    </md-input-container>
+			<div layout="row" layout-align="end center">
+		  	  	<md-button class="md-raised md-primary" type="submit" ng-disabled="loginActive">Log In</md-button> 	
+		  	</div>	
+		</form>
+	</div>
+</div>

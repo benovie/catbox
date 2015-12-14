@@ -1,0 +1,29 @@
+<md-subheader class="md-primary">
+	{{les.naam}}
+</md-subheader>
+<fb-data type="object" name="les" path="les/{{currentRoute.params.les}}"></fb-data>
+<md-divider ng-controller="LesController">
+	<md-button ng-if="hasPermission('opdracht','create')" class="md-fab md-primary md-mini" ng-click="addOpdracht(currentRoute.params.les)">
+		<md-icon>add</md-icon>
+	</md-button>
+</md-divider>
+<fb-data type="array" name="lesopdrachten" path="lesopdracht/{{currentRoute.params.les}}"></fb-data>
+<md-list>
+	<md-list-item ng-class="{done: opdracht.done}" ng-repeat="opdracht in lesopdrachten | orderBy:'titel'" class="md-2-line" ng-click="navigateTo('/les/'+currentRoute.params.les+'/opdracht/'+opdracht.$id)">	
+  		<md-icon ng-if="opdracht.type == 'vraag'">question_answer</md-icon>   
+  		<md-icon ng-if="opdracht.type == 'meerkeuze'">check_box</md-icon>  
+  		<md-icon ng-if="opdracht.type == 'groepsgesprek'">people</md-icon>     
+  		<div class="md-list-item-text">
+	        <h3>{{opdracht.titel}}</h3>
+			<p>
+				{{opdracht.vraag | limitTo: 60}} ...<br/>
+				<small ng-if="opdracht.type == 'groepsgesprek'">
+					{{opdracht.reacties.length || 0}} reactie(s)
+				</small>  
+			</p>
+		</div>
+	</md-list-item>
+</md-list>
+<p class="md-padding" ng-if="!lesopdrachten.length">
+	Er zijn geen opdrachten voor deze les
+</p>
