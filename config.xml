@@ -13,5 +13,6 @@
     </author>
     <platform name="android" />
     <plugin name="cordova-plugin-whitelist" />
+    <feature name="http://api.phonegap.com/1.0/network" />
     <access origin="*" />
 </widget>
