@@ -6,16 +6,16 @@
 		<md-icon>add</md-icon>
 	</md-button>
 </md-divider>
-<fb-data type="array" name="lessen" path="les"></fb-data>
 <md-list>
-	<md-list-item ng-click="navigateTo('les/' + les.$id)" ng-repeat="les in lessen | orderBy:'naam'" class="md-2-line">
-  		<md-icon>chrome_reader_mode</md-icon>
+	<md-list-item ng-click="navigateTo('les/' + userles.id)" ng-repeat="userles in account.user.lessen" class="md-2-line">
+		<md-icon>chrome_reader_mode</md-icon>
         <div class="md-list-item-text">
+        	<fb-data type="object" name="les" path="les/{{userles.id}}"></fb-data>
 			<h3>{{les.naam}}</h3>
 			<p>{{les.beschrijving}}</p>
         </div>
 	</md-list-item>
 </md-list>
-<p class="md-padding" ng-if="!lessen.length">
+<p class="md-padding" ng-if="!account.user.lessen">
 	Er zijn geen lessen beschikbaar
 </p>
