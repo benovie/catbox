@@ -4,14 +4,16 @@
 	</md-toolbar>
 	<div class="md-padding">
 		<form name="opdrachtToevoegenForm" ng-submit="submit()">
-			<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='groepsgesprek'}" ng-click="data.type = 'groepsgesprek'">
-				Gesprek
-			</md-button>
-			<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='meerkeuze'}" ng-click="data.type = 'meerkeuze'">Meerkeuze
-			</md-button>
-			<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='vraag'}" ng-click="data.type = 'vraag'">	
-				Vraag
-			</md-button>
+			<div class="type-opdracht-container">
+				<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='groepsgesprek'}" ng-click="data.type = 'groepsgesprek'">
+					Gesprek
+				</md-button>
+				<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='meerkeuze'}" ng-click="data.type = 'meerkeuze'">Meerkeuze
+				</md-button>
+				<md-button type="button" class="md-raised" ng-class="{'md-primary': data.type=='vraag'}" ng-click="data.type = 'vraag'">	
+					Vraag
+				</md-button>
+			</div>
 			<md-input-container>
 				<label>Vraag <sup>*</sup></label>
 				<input autofocus autocomplete="off" required ng-model="data.vraag" />
@@ -20,17 +22,19 @@
 				<label>Beschrijving</label>
 				<textarea ng-model="data.beschrijving"></textarea>
 			</md-input-container>
-			<div ng-if="data.type == 'meerkeuze'">
-				<h3 class="md-subject">Keuzes</h3>
+			<div ng-if="data.type == 'meerkeuze'" class="keuze-container">
+				<md-subheader class="md-primary">Keuzes</md-subheader>
 				<md-divider>
-					<md-button class="md-fab md-mini" type="button" ng-click="addNewArrayItem('keuzes')">
+					<md-button class="md-fab md-primary md-mini" type="button" ng-click="addNewArrayItem('keuzes')">
 						<md-icon>add</md-icon>
 					</md-button>
 				</md-divider>
-				<md-input-container ng-repeat="keuze in data.keuzes">
-					<label>Keuze {{$index + 1}}</label>
-					<input required ng-model="keuze.label" />
-				</md-input-container>
+				<div class="md-padding">
+					<md-input-container ng-repeat="keuze in data.keuzes">
+						<label>Keuze {{$index + 1}}</label>
+						<input required ng-model="keuze.label" />
+					</md-input-container>
+				</div>
 			</div>
 			<div layout="row" layout-align="end center">
 				<md-button type="button" ng-click="cancel()">
